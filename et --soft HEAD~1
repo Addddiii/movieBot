@@ -1,0 +1,9 @@
+[33mcommit 4cbff88e3969bd0f9e875c90cbd40c5dbe0c8a5e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Addddiii <143715296+Addddiii@users.noreply.github.com>
+Date:   Wed Aug 13 14:20:28 2025 +1000
+
+    Initial commit without secrets
+
+.env
+main.py
+main.py.backup
