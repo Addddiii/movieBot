@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MovieBot</title>
+    <style>
+        body { font-family: Arial; background: #111; color: white; }
+        #chatbox { height: 300px; overflow-y: scroll; border: 1px solid #555; padding: 10px; }
+        .message { margin: 5px 0; }
+        .user { color: cyan; }
+        .bot { color: lightgreen; }
+    </style>
+</head>
+<body>
+    <h1>🎬 MovieBot</h1>
+    <div id="chatbox"></div>
+    <input type="text" id="input" placeholder="Ask about movies, TV, or anime...">
+    <button onclick="sendMessage()">Send</button>
+    <button onclick="toggleSpoilers()">Toggle Spoilers</button>
+
+    <script>
+        const backendURL = "https://your-backend.onrender.com";
+
+        async function sendMessage() {
+            const message = document.getElementById("input").value;
+            appendMessage("user", message);
+            document.getElementById("input").value = "";
+
+            const res = await fetch(`${backendURL}/chat`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message })
+            });
+            const data = await res.json();
+            appendMessage("bot", data.reply);
+        }
+
+        async function toggleSpoilers() {
+            const res = await fetch(`${backendURL}/toggle_spoilers`, { method: "POST" });
+            const data = await res.json();
+            alert("Spoilers Enabled: " + data.spoilers_enabled);
+        }
+
+        function appendMessage(sender, text) {
+            const chatbox = document.getElementById("chatbox");
+            const div = document.createElement("div");
+            div.className = `message ${sender}`;
+            div.textContent = `${sender.toUpperCase()}: ${text}`;
+            chatbox.appendChild(div);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
