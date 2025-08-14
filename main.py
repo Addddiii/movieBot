@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-SPOILER_TOGGLE = False 
+SPOILERS_ENABLED = False 
 
 @app.post("/toggle_spoilers")
 async def toggle_spoilers():
